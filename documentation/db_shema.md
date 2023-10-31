@@ -17,12 +17,12 @@
 | ------------ | ---------- | --------------------- |
 | id           | integer    | not null, primary key |
 | title        | string(255)| not null              |
-| description  | string(255)| not null              |
-| instructions | string(255)| not null              |
+| description  | string     | not null              |
+| instructions | string     | not null              |
 | prep_time    | integer    | not null              |
 | cook_time    | integer    | not null              |
 | total_time   | integer    | not null              |
-| ingredients  | string(255)| not null              |
+| ingredients  | string     | not null              |
 | user_id      | integer    | not null, foreign key |
 
 - `user_id` references `users` table
@@ -34,7 +34,7 @@
 | id          | integer      | not null, primary key  |
 | recipe_id   | integer      | not null, foreign key  |
 | user_id     | integer      | not null, foreign key  |
-| comment_text| string(255)  | not null               |
+| comment_text| string       | not null               |
 | created_at  | datetime     | not null               |
 
 - `recipe_id` references `recipes` table
@@ -51,3 +51,14 @@
 
 - `recipe_id` references `recipes` table
 - `user_id` references `users` table
+
+## `ingredients`
+
+| column name   | data type  | details               |
+| ------------- | ---------- | --------------------- |
+| id            | integer    | not null, primary key |
+| recipe_id     | integer    | not null, foreign key |
+| name          | string     | not null              |
+| isVegan       | boolean    | not null              |
+
+- `recipe_id` references `recipes` table
