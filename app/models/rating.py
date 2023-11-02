@@ -11,8 +11,8 @@ class Rating(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     rating = db.Column(db.Integer, nullable=False)
 
-    user = db.relationship("User", back_populates="comment")
-    recipe = db.relationship("Recipe", back_populates="comment")
+    user = db.relationship("User", back_populates="rating")
+    recipe = db.relationship("Recipe", back_populates="rating")
 
     def to_dict(self):
         return {

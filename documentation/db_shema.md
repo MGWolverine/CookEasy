@@ -52,7 +52,7 @@
 - `recipe_id` references `recipes` table
 - `user_id` references `users` table
 
-## `ingredients`
+<!-- ## `ingredients`
 
 | column name   | data type  | details               |
 | ------------- | ---------- | --------------------- |
@@ -61,4 +61,4 @@
 | name          | string     | not null              |
 | isVegan       | boolean    | not null              |
 
-- `recipe_id` references `recipes` table
+- `recipe_id` references `recipes` table -->
