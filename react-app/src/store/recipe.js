@@ -32,8 +32,8 @@ const deleteRecipe = (recipeId) => ({
 });
 
 //THUNKS
-export const getRecipesThunk = () => (dispatch) => {
-    const response = await fetch("/api/recipes");
+export const getRecipesThunk = () => async (dispatch) => {
+    const response = await fetch("/api/recipes/");
 
     if (response.ok) {
         const recipes = await response.json();
@@ -46,51 +46,51 @@ export const getRecipesThunk = () => (dispatch) => {
 };
 
 export const getSingleRecipeThunk = (recipeId) => (dispatch) => {
-    const response = await fetch(`api/recipes/${recipeId}`);
+    const response = fetch(`api/recipes/${recipeId}`);
 
     if (response.ok) {
-        const recipe = await response.json();
+        const recipe = response.json();
         dispatch(loadSingleRecipe(recipe));
         return recipe;
     } else {
-        const errors = await response.json();
+        const errors = response.json();
         return errors
     }
 };
 
 export const createRecipeThunk = (recipe) => async (dispatch) => {
-    const response = await fetch(`/api/recipes/create_recipe`, {
+    const response = fetch(`/api/recipes/create_recipe`, {
         method: "POST",
         body: recipe,
     });
     if (response.ok) {
-        const newRecipe = await response.json();
+        const newRecipe = response.json();
         dispatch(createRecipe(newRecipe));
         return newRecipe;
     } else {
-        const errors = await response.json();
+        const errors = response.json();
         return errors
     }
 };
 
 export const updateRecipeThunk = (recipe) => (dispatch) => {
-    const response = await fetch(`/api/recipes/${recipe.id}`, {
+    const response = fetch(`/api/recipes/${recipe.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(recipe),
     });
     if (response.ok) {
-        const updatedRecipe = await response.json();
+        const updatedRecipe = response.json();
         dispatch(updateRecipe(updateRecipe));
         return updatedRecipe;
     } else {
-        const errors = await response.json();
+        const errors = response.json();
         return errors;
     }
 }
 
 export const deleteRecipeThunk = (recipeId) => async (dispatch) => {
-    const response = await fetch(`/api/recipes/${recipeId}`, {
+    const response = fetch(`/api/recipes/${recipeId}`, {
         method: "DELETE",
     });
     if (response.ok) {
@@ -131,6 +131,7 @@ const recipesReducer = (state = initialState, action) => {
             delete newState.allRecipes[action.recipeId];
             delete newState.singleRecipe;
             return newState;
+        default: return state;
     }
 }
 

@@ -11,7 +11,7 @@ def seed_recipes():
         prep_time=20,
         cook_time=25,
         total_time=45,
-        ingredients="2 | pound | chicken * 20 | grams | garlic",
+        ingredients="2 pound chicken breast * 20 grams garlic",
     )
     db.session.add(recipe1)
 

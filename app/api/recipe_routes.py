@@ -12,4 +12,5 @@ recipe_routes = Blueprint('recipes', __name__)
 @recipe_routes.route('/')
 def get_all_recipes():
     recipes = Recipe.query.all()
-    return jsonify([recipe.to_dict() for recipe in recipes])
+    print("TESTRECIPE", recipes)
+    return [recipe.to_dict() for recipe in recipes]
