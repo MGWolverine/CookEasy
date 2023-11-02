@@ -48,13 +48,13 @@ function HomePage() {
       <h1>Recipes</h1>
       <ul>
         {recipes.map((recipe) => (
-          <li key={recipe.id}>
+          <div key={recipe.id}>
             <img src={recipe.recipe_image}></img>
             <h2>{recipe.title}</h2>
             <p>{recipe.description}</p>
             {splitAndNumberedList(recipe.instructions)}
             {splitList(recipe.ingredients)}
-          </li>
+          </div>
         ))}
       </ul>
     </div>
