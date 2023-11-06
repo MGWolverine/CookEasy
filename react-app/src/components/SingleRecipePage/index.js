@@ -7,7 +7,6 @@ import "./SingleRecipePage.css";
 function SingleRecipePage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const [recipe, setRecipe] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false)
   const singleRecipe = useSelector(state => state.recipes.singleRecipe);
 

@@ -8,6 +8,7 @@ import SingleRecipePage from "./components/SingleRecipePage";
 import CreateRecipeForm from "./components/CreateRecipe";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import UpdateRecipe from "./components/UpdateRecipe";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path="/recipes/:id" component={SingleRecipePage} />
+          <Route path="/recipes/:id/edit" component={UpdateRecipe} />
           <Route exact path='/recipes/create_recipe' component={CreateRecipeForm} />
           <Route path="/login" component={LoginFormPage} />
           <Route path="/signup" component={SignupFormPage} />
