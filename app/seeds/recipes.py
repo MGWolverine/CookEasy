@@ -11,9 +11,22 @@ def seed_recipes():
         prep_time=20,
         cook_time=25,
         total_time=45,
-        ingredients="2 pound chicken breast * 20 grams garlic",
+        ingredients="2 pound chicken breast * 20 grams garlic * 50 grams red curry paste * 2 tablespoons vegetable oil * 1 white onion * 1 red pepper * 1 can of Coconut Milk * 1 tablespoon fish sauce * 1 tablespoon brown sugar * 1 lime * rice or noodles",
     )
     db.session.add(recipe1)
+
+    recipe2 = Recipe(
+        user_id=1,
+        title="PB&J Sandwich",
+        recipe_image="https://cook-easy.s3.us-east-2.amazonaws.com/peanut-butter-jelly.jpg",
+        description="A Peanut Butter and Jelly (PB&J) sandwich is a timeless classic, cherished for its delightful combination of flavors and textures. This straightforward recipe yields a delightful, sweet, and nutty sandwich that's loved by all ages. With just a few basic ingredients and minimal effort, you can create a satisfying PB&J sandwich that's perfect for breakfast, lunch, or a quick snack.",
+        instructions="Begin by laying out the two slices of bread on a clean surface. * Using a knife or a spoon, spread a generous layer of creamy or crunchy peanut butter on one of the bread slices.  * On the second bread slice, generously spread your chosen fruity jelly or jam. * Gently place the two bread slices together, with the peanut butter and jelly sides facing each other.",
+        prep_time=5,
+        cook_time=0,
+        total_time=5,
+        ingredients="2 slices of bread * Peanut butter * Jelly",
+    )
+    db.session.add(recipe2)
 
     db.session.commit()
 

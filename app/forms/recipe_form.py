@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, FloatField
+from wtforms import StringField, IntegerField, FloatField, SubmitField
 from wtforms.validators import DataRequired
 
 from flask_wtf.file import FileRequired, FileAllowed, FileField
@@ -13,5 +13,6 @@ class RecipeForm(FlaskForm):
     prep_time = FloatField('prep_time', validators=[DataRequired(message="This field is required")])
     cook_time = FloatField('cook_time', validators=[DataRequired(message="This field is required")])
     total_time = FloatField('total_time', validators=[DataRequired(message="This field is required")])
-    ingedients = StringField('ingredients', validators=[DataRequired(message="This field is required")])
+    ingredients = StringField('ingredients', validators=[DataRequired(message="This field is required")])
     user_id = IntegerField('user_id', validators=[DataRequired()])
+    submit = SubmitField("Create Recipe")

@@ -45,30 +45,31 @@ export const getRecipesThunk = () => async (dispatch) => {
     }
 };
 
-export const getSingleRecipeThunk = (recipeId) => (dispatch) => {
-    const response = fetch(`api/recipes/${recipeId}`);
+export const getSingleRecipeThunk = (id) => async (dispatch) => {
+    const response = await fetch(`/api/recipes/${id}`);
 
     if (response.ok) {
-        const recipe = response.json();
+        const recipe = await response.json();
         dispatch(loadSingleRecipe(recipe));
         return recipe;
     } else {
-        const errors = response.json();
+        const errors = await response.json();
         return errors
     }
 };
 
 export const createRecipeThunk = (recipe) => async (dispatch) => {
-    const response = fetch(`/api/recipes/create_recipe`, {
+    const response = await fetch(`/api/recipes/create_recipe`, {
         method: "POST",
         body: recipe,
     });
     if (response.ok) {
-        const newRecipe = response.json();
+        const newRecipe = await response.json();
         dispatch(createRecipe(newRecipe));
+        console.log('NEWRECIPEEEEEE', newRecipe)
         return newRecipe;
     } else {
-        const errors = response.json();
+        const errors = await response.json();
         return errors
     }
 };
@@ -120,7 +121,7 @@ const recipesReducer = (state = initialState, action) => {
             return newState;
         case CREATE_RECIPE:
             newState = {...state};
-            newState.allRecipes[action.recipe.id] = action.recipes;
+            newState.singleRecipe[action.recipe.id] = action.recipe;
             return newState;
         case UPDATE_RECIPE:
             newState = {...state};

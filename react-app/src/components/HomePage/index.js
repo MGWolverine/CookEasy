@@ -22,11 +22,11 @@ function HomePage() {
     const filteredParts = parts.filter((part) => part.trim() !== "");
 
     return (
-      <li>
+      <ul>
         {filteredParts.map((part, index) => (
           <li key={index}>{part}</li>
         ))}
-      </li>
+      </ul>
     );
   };
 
