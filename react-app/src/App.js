@@ -24,7 +24,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path="/recipes/:id" component={SingleRecipePage} />
-          <Route path="/recipes/:id/edit" component={UpdateRecipe} />
+          <Route exact path="/recipes/:id/edit" component={UpdateRecipe} />
           <Route exact path='/recipes/create_recipe' component={CreateRecipeForm} />
           <Route path="/login" component={LoginFormPage} />
           <Route path="/signup" component={SignupFormPage} />

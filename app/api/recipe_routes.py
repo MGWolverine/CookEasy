@@ -63,9 +63,14 @@ def create_recipe():
 @login_required
 def edit_recipe(id):
     form = RecipeForm()
+
+    print('WE NOT IN HERE NOW BOIZ')
+
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         recipe = Recipe.query.get(id)
+
+        print('WE IN HERE NOW BOIZ')
 
         updated_title = form.data['title']
         updated_description = form.data['description']

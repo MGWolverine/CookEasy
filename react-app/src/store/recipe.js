@@ -21,9 +21,9 @@ const createRecipe = (recipe) => ({
   recipe,
 });
 
-const updateRecipe = (recipe) => ({
+const updateRecipe = (id) => ({
   type: UPDATE_RECIPE,
-  recipe,
+  id,
 });
 
 const deleteRecipe = (recipeId) => ({
@@ -66,7 +66,6 @@ export const createRecipeThunk = (recipe) => async (dispatch) => {
     if (response.ok) {
         const newRecipe = await response.json();
         dispatch(createRecipe(newRecipe));
-        console.log('NEWRECIPEEEEEE', newRecipe)
         return newRecipe;
     } else {
         const errors = await response.json();
@@ -74,24 +73,24 @@ export const createRecipeThunk = (recipe) => async (dispatch) => {
     }
 };
 
-export const updateRecipeThunk = (recipe) => (dispatch) => {
-    const response = fetch(`/api/recipes/${recipe.id}`, {
+export const updateRecipeThunk = (form, recipeId) => async (dispatch) => {
+    const response = await fetch(`/api/recipes/${recipeId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(recipe),
+        body: JSON.stringify(form),
     });
     if (response.ok) {
-        const updatedRecipe = response.json();
-        dispatch(updateRecipe(updateRecipe));
+        const updatedRecipe = await response.json();
+        dispatch(updateRecipe(updatedRecipe));
         return updatedRecipe;
     } else {
-        const errors = response.json();
+        const errors = await response.json();
         return errors;
     }
 }
 
 export const deleteRecipeThunk = (recipeId) => async (dispatch) => {
-    const response = fetch(`/api/recipes/${recipeId}`, {
+    const response = await fetch(`/api/recipes/${recipeId}`, {
         method: "DELETE",
     });
     if (response.ok) {

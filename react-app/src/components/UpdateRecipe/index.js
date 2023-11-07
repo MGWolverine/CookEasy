@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleRecipeThunk } from "../../store/recipe";
+import { useParams, useHistory } from "react-router-dom";
+import { getSingleRecipeThunk, updateRecipeThunk } from "../../store/recipe";
 
-function UpdateRecipe() {
+function UpdateRecipe({recipeId}) {
+    const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const userId = useSelector((state) => state.session.user.id);
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
   const [title, setTitle] = useState("");
@@ -14,11 +17,14 @@ function UpdateRecipe() {
   const [total_time, setTotal_time] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [errors, setErrors] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false)
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
-    dispatch(getSingleRecipeThunk(userId));
-  }, [dispatch, userId]);
+    dispatch(getSingleRecipeThunk(id))
+      setIsLoaded(true)
+  }, [dispatch, id]);
+
 
   useEffect(() => {
     setTitle(singleRecipe.title || "");
@@ -77,8 +83,8 @@ function UpdateRecipe() {
     };
 
     if (Object.keys(errorsFound).length === 0) {
-      const response = await dispatch(updateRecipeThunk(updatedRecipe));
-      dispatch(getSingleRecipeThunk(id));
+      const response = dispatch(updateRecipeThunk(updatedRecipe));
+      history.push(`/recipes/${response.id}`);
     }
   };
 
