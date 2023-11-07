@@ -23,9 +23,9 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path="/recipes/:id" component={SingleRecipePage} />
           <Route exact path="/recipes/:id/edit" component={UpdateRecipe} />
           <Route exact path='/recipes/create_recipe' component={CreateRecipeForm} />
+          <Route exact path="/recipes/:id" component={SingleRecipePage} />
           <Route path="/login" component={LoginFormPage} />
           <Route path="/signup" component={SignupFormPage} />
           <Route> Page Not Found </Route>

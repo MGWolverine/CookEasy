@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getRecipesThunk } from "../../store/recipe";
+import { useHistory } from "react-router-dom";
 import "./HomePage.css";
 
 function HomePage() {
   const dispatch = useDispatch();
   const [recipes, setRecipes] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getRecipesThunk()).then((data) => {
@@ -48,13 +50,19 @@ function HomePage() {
       <h1>Recipes</h1>
       <ul>
         {recipes.map((recipe) => (
-          <li key={recipe.id}>
-            <img src={recipe.recipe_image}></img>
-            <h2>{recipe.title}</h2>
-            <p>{recipe.description}</p>
-            {splitAndNumberedList(recipe.instructions)}
-            {splitList(recipe.ingredients)}
-          </li>
+          <div
+            onClick={() => {
+              history.push(`/recipes/${recipe.id}`);
+            }}
+          >
+            <li key={recipe.id}>
+              <img src={recipe.recipe_image}></img>
+              <h2>{recipe.title}</h2>
+              <p>{recipe.description}</p>
+              {splitAndNumberedList(recipe.instructions)}
+              {splitList(recipe.ingredients)}
+            </li>
+          </div>
         ))}
       </ul>
     </div>
