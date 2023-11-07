@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getSingleRecipeThunk, updateRecipeThunk } from "../../store/recipe";
 
-function UpdateRecipe({recipeId}) {
-    const { id } = useParams();
+function UpdateRecipe() {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const userId = useSelector((state) => state.session.user.id);
@@ -17,14 +17,13 @@ function UpdateRecipe({recipeId}) {
   const [total_time, setTotal_time] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [errors, setErrors] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
-    dispatch(getSingleRecipeThunk(id))
-      setIsLoaded(true)
+    dispatch(getSingleRecipeThunk(id));
+    setIsLoaded(true);
   }, [dispatch, id]);
-
 
   useEffect(() => {
     setTitle(singleRecipe.title || "");
@@ -80,98 +79,102 @@ function UpdateRecipe({recipeId}) {
       cook_time,
       total_time,
       ingredients,
+      user_id: userId,
     };
 
     if (Object.keys(errorsFound).length === 0) {
-      const response = dispatch(updateRecipeThunk(updatedRecipe));
+      const response = await dispatch(updateRecipeThunk(updatedRecipe, id));
+
       history.push(`/recipes/${response.id}`);
     }
   };
 
   return (
     <div>
-      <form
-        className="upload-form"
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          {hasSubmitted && errors.title && (
-            <p className="upload-recipe-errors">{errors.title}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          {hasSubmitted && errors.description && (
-            <p className="upload-recipe-errors">{errors.description}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="instructions">Instructions:</label>
-          <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
-          />
-          {hasSubmitted && errors.instructions && (
-            <p className="upload-recipe-errors">{errors.instructions}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="prep_time">Prep Time (minutes):</label>
-          <input
-            type="number"
-            value={prep_time}
-            onChange={(e) => setPrep_time(e.target.value)}
-          />
-          {hasSubmitted && errors.prep_time && (
-            <p className="upload-recipe-errors">{errors.prep_time}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="cook_time">Cook Time (minutes):</label>
-          <input
-            type="number"
-            value={cook_time}
-            onChange={(e) => setCook_time(e.target.value)}
-          />
-          {hasSubmitted && errors.cook_time && (
-            <p className="upload-recipe-errors">{errors.cook_time}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="total_time">Total Time (minutes):</label>
-          <input
-            type="number"
-            value={total_time}
-            onChange={(e) => setTotal_time(e.target.value)}
-          />
-          {hasSubmitted && errors.total_time && (
-            <p className="upload-recipe-errors">{errors.total_time}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="ingredients">Ingredients:</label>
-          <textarea
-            value={ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
-          />
-          {hasSubmitted && errors.ingredients && (
-            <p className="upload-recipe-errors">{errors.ingredients}</p>
-          )}
-        </div>
-        <button type="submit">Create Recipe</button>
-      </form>
+      {isLoaded && (
+        <form
+          className="upload-form"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          <div>
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            {hasSubmitted && errors.title && (
+              <p className="upload-recipe-errors">{errors.title}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="description">Description:</label>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            {hasSubmitted && errors.description && (
+              <p className="upload-recipe-errors">{errors.description}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="instructions">Instructions:</label>
+            <textarea
+              value={instructions}
+              onChange={(e) => setInstructions(e.target.value)}
+            />
+            {hasSubmitted && errors.instructions && (
+              <p className="upload-recipe-errors">{errors.instructions}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="prep_time">Prep Time (minutes):</label>
+            <input
+              type="number"
+              value={prep_time}
+              onChange={(e) => setPrep_time(e.target.value)}
+            />
+            {hasSubmitted && errors.prep_time && (
+              <p className="upload-recipe-errors">{errors.prep_time}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="cook_time">Cook Time (minutes):</label>
+            <input
+              type="number"
+              value={cook_time}
+              onChange={(e) => setCook_time(e.target.value)}
+            />
+            {hasSubmitted && errors.cook_time && (
+              <p className="upload-recipe-errors">{errors.cook_time}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="total_time">Total Time (minutes):</label>
+            <input
+              type="number"
+              value={total_time}
+              onChange={(e) => setTotal_time(e.target.value)}
+            />
+            {hasSubmitted && errors.total_time && (
+              <p className="upload-recipe-errors">{errors.total_time}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="ingredients">Ingredients:</label>
+            <textarea
+              value={ingredients}
+              onChange={(e) => setIngredients(e.target.value)}
+            />
+            {hasSubmitted && errors.ingredients && (
+              <p className="upload-recipe-errors">{errors.ingredients}</p>
+            )}
+          </div>
+          <button type="submit">Update Recipe</button>
+        </form>
+      )}
     </div>
   );
 }
