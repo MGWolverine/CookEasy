@@ -34,7 +34,7 @@
 | id          | integer      | not null, primary key  |
 | recipe_id   | integer      | not null, foreign key  |
 | user_id     | integer      | not null, foreign key  |
-| comment_text| string       | not null               |
+| comment| string       | not null               |
 | created_at  | datetime     | not null               |
 
 - `recipe_id` references `recipes` table

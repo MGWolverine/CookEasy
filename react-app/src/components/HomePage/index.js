@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getRecipesThunk } from "../../store/recipe";
+import { useHistory } from "react-router-dom";
 import "./HomePage.css";
 
 function HomePage() {
   const dispatch = useDispatch();
   const [recipes, setRecipes] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getRecipesThunk()).then((data) => {
@@ -22,11 +24,11 @@ function HomePage() {
     const filteredParts = parts.filter((part) => part.trim() !== "");
 
     return (
-      <li>
+      <ul>
         {filteredParts.map((part, index) => (
           <li key={index}>{part}</li>
         ))}
-      </li>
+      </ul>
     );
   };
 
@@ -44,19 +46,24 @@ function HomePage() {
   };
 
   return (
-    <div>
-      <h1>Recipes</h1>
-      <ul>
-        {recipes.map((recipe) => (
-          <div key={recipe.id}>
-            <img src={recipe.recipe_image}></img>
+    <div className="homepage-container">
+      {recipes.map((recipe) => (
+        <div
+          className="recipe-item"
+          onClick={() => {
+            history.push(`/recipes/${recipe.id}`);
+          }}
+          key={recipe.id}
+        >
+          <img src={recipe.recipe_image} alt={recipe.title} />
+          <div>
             <h2>{recipe.title}</h2>
             <p>{recipe.description}</p>
             {splitAndNumberedList(recipe.instructions)}
             {splitList(recipe.ingredients)}
           </div>
-        ))}
-      </ul>
+        </div>
+      ))}
     </div>
   );
 }

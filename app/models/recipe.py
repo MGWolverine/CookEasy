@@ -18,7 +18,7 @@ class Recipe(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
 
     user = db.relationship("User", back_populates="recipe")
-    comment = db.relationship("Comment", back_populates="recipe")
+    comments = db.relationship("Comment", back_populates="recipe")
     ingredient = db.relationship("Ingredient", back_populates="recipe")
     rating = db.relationship("Rating", back_populates="recipe")
 
@@ -34,4 +34,5 @@ class Recipe(db.Model):
             'total_time': self.total_time,
             'ingredients': self.ingredients,
             'user_id': self.user_id,
+            'comments': [comment.to_dict() for comment in self.comments],
         }

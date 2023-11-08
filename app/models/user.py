@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     recipe = db.relationship("Recipe", back_populates="user")
-    comment = db.relationship("Comment", back_populates="user")
+    comments = db.relationship("Comment", back_populates="user")
     rating = db.relationship("Rating", back_populates="user")
 
     @property
