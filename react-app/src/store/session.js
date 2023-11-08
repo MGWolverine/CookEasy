@@ -67,18 +67,21 @@ export const logout = () => async (dispatch) => {
 	}
 };
 
-export const signUp = (username, email, password) => async (dispatch) => {
-	const response = await fetch("/api/auth/signup", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			username,
-			email,
-			password,
-		}),
-	});
+export const signUp =
+  (username, firstName, lastName, email, password) => async (dispatch) => {
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password,
+      }),
+    });
 
 	if (response.ok) {
 		const data = await response.json();
