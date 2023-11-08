@@ -46,25 +46,24 @@ function HomePage() {
   };
 
   return (
-    <div>
-      <h1>Recipes</h1>
-      <ul>
-        {recipes.map((recipe) => (
-          <div
-            onClick={() => {
-              history.push(`/recipes/${recipe.id}`);
-            }}
-          >
-            <li key={recipe.id}>
-              <img src={recipe.recipe_image}></img>
-              <h2>{recipe.title}</h2>
-              <p>{recipe.description}</p>
-              {splitAndNumberedList(recipe.instructions)}
-              {splitList(recipe.ingredients)}
-            </li>
+    <div className="homepage-container">
+      {recipes.map((recipe) => (
+        <div
+          className="recipe-item"
+          onClick={() => {
+            history.push(`/recipes/${recipe.id}`);
+          }}
+          key={recipe.id}
+        >
+          <img src={recipe.recipe_image} alt={recipe.title} />
+          <div>
+            <h2>{recipe.title}</h2>
+            <p>{recipe.description}</p>
+            {splitAndNumberedList(recipe.instructions)}
+            {splitList(recipe.ingredients)}
           </div>
-        ))}
-      </ul>
+        </div>
+      ))}
     </div>
   );
 }

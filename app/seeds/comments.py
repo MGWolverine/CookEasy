@@ -6,7 +6,7 @@ def seed_comments():
         recipe_id=1,
         user_id=1,
         rating=4,
-        comment_text='Very good recipe, will try again',
+        comment='Very good recipe, will try again',
     )
     db.session.add(comment1)
 
@@ -14,7 +14,7 @@ def seed_comments():
         recipe_id=1,
         user_id=1,
         rating=2,
-        comment_text='Very MEH recipe, probably will not try again',
+        comment='Very MEH recipe, probably will not try again',
     )
     db.session.add(comment2)
 

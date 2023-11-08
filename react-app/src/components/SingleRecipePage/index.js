@@ -3,21 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleRecipeThunk } from "../../store/recipe";
 import { useParams, Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
-import "./SingleRecipePage.css";
 import DeleteRecipe from "../DeleteRecipe";
+import { getCommentThunk } from "../../store/comment";
+import "./SingleRecipePage.css";
 
 function SingleRecipePage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
+  const allComments = useSelector((state) => state.comments.allComments);
   const [submitted, setSubmitted] = useState(false);
+
 
   useEffect(() => {
     dispatch(getSingleRecipeThunk(id));
+    dispatch(getCommentThunk());
     setIsLoaded(true);
   }, [dispatch, id]);
 
+  console.log(allComments)
   const splitList = (text) => {
     const parts = text.split("*");
     const filteredParts = parts.filter((part) => part.trim() !== "");

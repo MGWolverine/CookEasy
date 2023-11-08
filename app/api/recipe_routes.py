@@ -17,13 +17,10 @@ def get_all_recipes():
 #GET A SINGLE RECIPE
 @recipe_routes.route('/<int:id>')
 def get_single_recipe(id):
-    print('BACKEND ID', id)
     recipe = Recipe.query.get(id)
-    print('BACKEND RECIPE', recipe)
     if recipe:
         return recipe.to_dict()
     else:
-        print('ERROR BACKEND')
         return {'error': 'Recipe not found'}, 404
 
 #CREATE A RECIPE
@@ -36,7 +33,6 @@ def create_recipe():
         recipe_image = form.data['recipe_image']
         recipe_image.filename = get_unique_filename(recipe_image.filename)
         upload = upload_file_to_s3(recipe_image)
-        print('TEST ', upload)
 
         if 'url' not in upload:
             return {'errors': [upload]}
@@ -100,4 +96,4 @@ def delete_recipe(id):
         db.session.commit()
         return "Recipe successfully deleted."
     else:
-        return {'error': 'Song does not exist'}, 404
+        return {'error': 'Recipe does not exist'}, 404
