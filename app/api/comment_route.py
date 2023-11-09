@@ -16,10 +16,13 @@ def get_all_comments():
 @comment_routes.route('/create_comment', methods=['POST'])
 @login_required
 def create_comment():
+    # comment_data = request.form
+    # print('COMMENT DATA   ', comment_data.comment)
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit:
-
+    print('FORM RATING ', form.data)
+    if form.validate_on_submit():
+        print("IN THE COMMENT API")
         new_comment = Comment(
             recipe_id = form.data['recipe_id'],
             user_id = form.data['user_id'],

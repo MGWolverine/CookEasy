@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getRecipesThunk } from "../../store/recipe";
 import { useHistory } from "react-router-dom";
 import "./HomePage.css";
@@ -7,6 +7,7 @@ import "./HomePage.css";
 function HomePage() {
   const dispatch = useDispatch();
   const [recipes, setRecipes] = useState([]);
+  const allRecipes = useSelector((state) => state.recipes.allRecipes)
   const history = useHistory();
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function HomePage() {
 
   return (
     <div className="homepage-container">
-      {recipes.map((recipe) => (
+      {Object.values(allRecipes).length > 0 && Object.values(allRecipes).map((recipe) => (
         <div
           className="recipe-item"
           onClick={() => {

@@ -23,7 +23,7 @@ const createRecipe = (recipe) => ({
 
 const updateRecipe = (form) => ({
   type: UPDATE_RECIPE,
-  form
+  form,
 });
 
 const deleteRecipe = (recipeId) => ({
@@ -112,7 +112,9 @@ const recipesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_RECIPES:
       newState = { ...state };
-      newState.allRecipes = action.recipes;
+      action.recipes.forEach((recipe) => {
+        newState.allRecipes[recipe.id] = recipe;
+      });
       return newState;
     case GET_SINGLE_RECIPE:
       newState = { ...state };

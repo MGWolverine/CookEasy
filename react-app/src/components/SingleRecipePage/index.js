@@ -6,15 +6,15 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteRecipe from "../DeleteRecipe";
 import { getCommentThunk } from "../../store/comment";
 import "./SingleRecipePage.css";
+import CreateComment from "../CreateComment";
 
 function SingleRecipePage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
-  const allComments = useSelector((state) => state.comments.allComments);
+  // const allComments = useSelector((state) => state.comments.allComments);
   const [submitted, setSubmitted] = useState(false);
-
 
   useEffect(() => {
     dispatch(getSingleRecipeThunk(id));
@@ -22,7 +22,6 @@ function SingleRecipePage() {
     setIsLoaded(true);
   }, [dispatch, id]);
 
-  console.log(allComments)
   const splitList = (text) => {
     const parts = text.split("*");
     const filteredParts = parts.filter((part) => part.trim() !== "");
@@ -61,8 +60,21 @@ function SingleRecipePage() {
           {singleRecipe.id && splitAndNumberedList(singleRecipe.instructions)}
           <h2>Ingredients:</h2>
           {singleRecipe.id && splitList(singleRecipe.ingredients)}
+          {singleRecipe?.comments?.length > 0 &&
+            singleRecipe?.comments?.map((blurb) => <p>{blurb.comment}</p>)}
         </div>
       )}
+      <div>
+        <OpenModalButton
+          buttonText={"Create Comment"}
+          modalComponent={
+            <CreateComment
+              recipeId={singleRecipe.id}
+              submitted={() => setSubmitted(true)}
+            />
+          }
+        />
+      </div>
       <div>
         <OpenModalButton
           buttonText={"Delete"}

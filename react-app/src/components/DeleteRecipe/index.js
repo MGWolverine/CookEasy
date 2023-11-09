@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { deleteRecipeThunk } from "../../store/recipe";
+import { deleteRecipeThunk, getRecipesThunk } from "../../store/recipe";
 
 function DeleteRecipe({recipeId, submitted}) {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ function DeleteRecipe({recipeId, submitted}) {
   const confirmDelete = (e) => {
     e.preventDefault();
     dispatch(deleteRecipeThunk(recipeId)).then(closeModal);
-    submitted();
+    dispatch(getRecipesThunk())
     setExist(false);
     history.push('/')
   };
