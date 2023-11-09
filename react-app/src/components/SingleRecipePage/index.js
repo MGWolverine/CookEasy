@@ -9,6 +9,7 @@ import DeleteComment from "../DeleteComment";
 import { getCommentThunk } from "../../store/comment";
 import "./SingleRecipePage.css";
 import CreateComment from "../CreateComment";
+import { useHistory } from "react-router-dom";
 
 function SingleRecipePage() {
   const { id } = useParams();
@@ -17,6 +18,7 @@ function SingleRecipePage() {
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
   // const allComments = useSelector((state) => state.comments.allComments);
   const [submitted, setSubmitted] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getSingleRecipeThunk(id));
@@ -117,7 +119,9 @@ function SingleRecipePage() {
           }
         />
       </div>
-      <button to={`/recipes/${singleRecipe.id}/edit`}>Update Recipe</button>
+      <button onClick={() => history.push(`/recipes/${singleRecipe.id}/edit`)}>
+        Update Recipe
+      </button>
     </>
   );
 }
