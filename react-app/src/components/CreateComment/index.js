@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { getSingleRecipeThunk } from "../../store/recipe";
 
 function CreateComment() {
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
   const { closeModal } = useModal();
@@ -36,7 +38,7 @@ function CreateComment() {
       user_id: user.id,
       recipe_id: singleRecipe.id,
     };
-
+    let newComment;
     if (Object.keys(errorsFound).length === 0) {
       const response = await fetch(`/api/comments/create_comment`, {
         method: "POST",
@@ -44,7 +46,9 @@ function CreateComment() {
         body: JSON.stringify(commentObj),
       });
       if (response.ok) {
-        await response.json();
+        newComment = await response.json();
+        await dispatch(getSingleRecipeThunk(newComment.recipe_id))
+        closeModal();
       } else {
         const errorData = await response.json();
         console.error("Error:", errorData);
@@ -53,7 +57,6 @@ function CreateComment() {
       setComment("");
       setRating(0);
     }
-    closeModal();
   };
 
   const handleClose = () => {
@@ -84,6 +87,8 @@ function CreateComment() {
             <div>
               <label htmlFor="rating">Rating:</label>
               <input
+                min={1}
+                max={5}
                 type="number"
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}

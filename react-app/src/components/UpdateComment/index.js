@@ -43,6 +43,7 @@ function UpdateComment({ currentComment }) {
       });
       if (response.ok) {
         await response.json();
+        await dispatch(getSingleRecipeThunk(currentComment.recipe_id))
       } else {
         const errorData = await response.json();
         console.error("Error:", errorData);
@@ -50,7 +51,6 @@ function UpdateComment({ currentComment }) {
 
       setComment("");
       setRating(0);
-      await dispatch(getSingleRecipeThunk(currentComment.recipe_id))
       closeModal();
     }
   };
