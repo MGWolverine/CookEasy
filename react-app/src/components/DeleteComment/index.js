@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { getSingleRecipeThunk } from "../../store/recipe";
 
-function DeleteRecipe() {
+function DeleteComment({currentComment}) {
   const dispatch = useDispatch();
   const [exist, setExist] = useState(true);
   const { closeModal } = useModal();
-  const history = useHistory();
 
   const confirmDelete = async (e) => {
     e.preventDefault();
-    await dispatch(deleteRecipeThunk(recipeId)).then(closeModal);
-    await dispatch(getRecipesThunk());
+    const response = await fetch(`/api/comments/${currentComment.id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        await dispatch(getSingleRecipeThunk(currentComment.recipe_id))
+        closeModal()
+      } else {
+        const errors = response.json();
+        return errors;
+      }
     setExist(false);
-    history.push("/");
   };
 
   const cancelDelete = (e) => {
@@ -41,4 +48,4 @@ function DeleteRecipe() {
   );
 }
 
-export default DeleteRecipe;
+export default DeleteComment;
