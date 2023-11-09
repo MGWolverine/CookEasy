@@ -55,6 +55,7 @@ function SingleRecipePage() {
       {isLoaded && (
         <div>
           <Link to="/">Back to All Recipes</Link>
+
           <img src={singleRecipe.recipe_image} alt={singleRecipe.title} />
           <h1>{singleRecipe.title}</h1>
           <p>{singleRecipe.description}</p>
@@ -116,6 +117,7 @@ function SingleRecipePage() {
           }
         />
       </div>
+      <button to={`/recipes/${singleRecipe.id}/edit`}>Update Recipe</button>
     </>
   );
 }
