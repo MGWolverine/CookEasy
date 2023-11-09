@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipesThunk } from "../../store/recipe";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import "./HomePage.css";
 
 function HomePage() {
@@ -48,6 +48,7 @@ function HomePage() {
 
   return (
     <div className="homepage-container">
+      <Link to="/recipes/create_recipe">create a recipe</Link>
       {Object.values(allRecipes).length > 0 && Object.values(allRecipes).map((recipe) => (
         <div
           className="recipe-item"

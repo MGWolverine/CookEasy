@@ -4,6 +4,7 @@ import { getSingleRecipeThunk } from "../../store/recipe";
 import { useParams, Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import DeleteRecipe from "../DeleteRecipe";
+import UpdateComment from "../UpdateComment";
 import { getCommentThunk } from "../../store/comment";
 import "./SingleRecipePage.css";
 import CreateComment from "../CreateComment";
@@ -61,7 +62,23 @@ function SingleRecipePage() {
           <h2>Ingredients:</h2>
           {singleRecipe.id && splitList(singleRecipe.ingredients)}
           {singleRecipe?.comments?.length > 0 &&
-            singleRecipe?.comments?.map((blurb) => <p>{blurb.comment}</p>)}
+            singleRecipe?.comments?.map((blurb) => (
+              <>
+                <p>{blurb.comment}</p>
+                <div>
+                  <OpenModalButton
+                    buttonText={"Update Comment"}
+                    modalComponent={
+                      <UpdateComment
+                        currentComment={blurb}
+                        recipeId={singleRecipe.id}
+                        submitted={() => setSubmitted(true)}
+                      />
+                    }
+                  />
+                </div>
+              </>
+            ))}
         </div>
       )}
       <div>

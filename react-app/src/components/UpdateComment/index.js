@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import { getSingleRecipeThunk } from "../../store/recipe";
 
-function CreateComment() {
+function UpdateComment({ currentComment }) {
   const user = useSelector((state) => state.session.user);
+  const history = useHistory()
+  const dispatch = useDispatch()
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
   const { closeModal } = useModal();
-  const [comment, setComment] = useState("");
-  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("" || currentComment.comment);
+  const [rating, setRating] = useState(0 || currentComment.rating);
   const [errors, setErrors] = useState({});
 
   function errorsChecked(comment, rating) {
@@ -24,13 +28,7 @@ function CreateComment() {
     e.preventDefault();
     const errorsFound = errorsChecked(comment, rating);
 
-    const commentForm = new FormData();
-    commentForm.append("comment", comment);
-    commentForm.append("rating", rating);
-    commentForm.append("user_id", user.id);
-    commentForm.append("recipe_id", singleRecipe.id);
-
-    const commentObj = {
+    const commentObjUpdated = {
       comment: comment,
       rating: rating,
       user_id: user.id,
@@ -38,10 +36,10 @@ function CreateComment() {
     };
 
     if (Object.keys(errorsFound).length === 0) {
-      const response = await fetch(`/api/comments/create_comment`, {
-        method: "POST",
+      const response = await fetch(`/api/comments/${currentComment.id}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(commentObj),
+        body: JSON.stringify(commentObjUpdated),
       });
       if (response.ok) {
         await response.json();
@@ -52,8 +50,9 @@ function CreateComment() {
 
       setComment("");
       setRating(0);
+      await dispatch(getSingleRecipeThunk(currentComment.recipe_id))
+      closeModal();
     }
-    closeModal();
   };
 
   const handleClose = () => {
@@ -94,10 +93,10 @@ function CreateComment() {
             </div>
           </form>
         </div>
-        <button onClick={handleSubmit}>Submit comment</button>
+        <button onClick={handleSubmit}>Update comment</button>
       </div>
     </>
   );
 }
 
-export default CreateComment;
+export default UpdateComment;
