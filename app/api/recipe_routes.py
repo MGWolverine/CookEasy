@@ -29,7 +29,8 @@ def get_single_recipe(id):
 def create_recipe():
     form = RecipeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit:
+    print('RECIPE ROUTE', form.data)
+    if form.validate_on_submit():
         recipe_image = form.data['recipe_image']
         recipe_image.filename = get_unique_filename(recipe_image.filename)
         upload = upload_file_to_s3(recipe_image)
