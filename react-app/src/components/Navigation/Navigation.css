@@ -5,3 +5,33 @@
 .hidden {
   display: none;
 }
+
+.main-header {
+  padding-bottom: 10px;
+  border-bottom: 2px solid #000000;
+}
+
+.create-recipe-link {
+  text-decoration: none;
+  background-color: rgb(196, 13, 13);
+  border-radius: 20px;
+  padding: 5px;
+  color: white;
+  font-size: x-large;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: xx-large;
+  color: rgb(196, 13, 13);
+}
