@@ -27,7 +27,7 @@ function SingleRecipePage() {
   }, [dispatch, id]);
 
   const splitList = (text) => {
-    const parts = text.split("*");
+    const parts = text.split(".");
     const filteredParts = parts.filter((part) => part.trim() !== "");
 
     return (
@@ -40,7 +40,7 @@ function SingleRecipePage() {
   };
 
   const splitAndNumberedList = (text) => {
-    const parts = text.split("*");
+    const parts = text.split(".");
     const filteredParts = parts.filter((part) => part.trim() !== "");
 
     return (
