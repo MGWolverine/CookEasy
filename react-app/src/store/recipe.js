@@ -65,10 +65,6 @@ export const createRecipeThunk = (recipe) => async (dispatch) => {
   });
   if (response.ok) {
     const newRecipe = await response.json();
-    console.log(
-      "🚀 ~ file: recipe.js:68 ~ createRecipeThunk ~ newRecipe:",
-      newRecipe
-    );
     dispatch(createRecipe(newRecipe));
     return newRecipe;
   } else {
@@ -138,6 +134,7 @@ const recipesReducer = (state = initialState, action) => {
         singleRecipe: { ...state.singleRecipe },
         allRecipes: { ...state.allRecipes },
       };
+      newState.allRecipes[action.recipe.id] = action.recipe;
       newState.singleRecipe[action.recipe.id] = action.recipe;
       return newState;
     case UPDATE_RECIPE:
