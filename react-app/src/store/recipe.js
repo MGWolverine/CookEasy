@@ -65,6 +65,10 @@ export const createRecipeThunk = (recipe) => async (dispatch) => {
   });
   if (response.ok) {
     const newRecipe = await response.json();
+    console.log(
+      "🚀 ~ file: recipe.js:68 ~ createRecipeThunk ~ newRecipe:",
+      newRecipe
+    );
     dispatch(createRecipe(newRecipe));
     return newRecipe;
   } else {
@@ -111,27 +115,47 @@ const recipesReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
     case GET_RECIPES:
-      newState = { ...state, allRecipes: { ...state.allRecipes } };
+      newState = {
+        ...state,
+        allRecipes: { ...state.allRecipes },
+        singleRecipe: { ...state.singleRecipe },
+      };
       action.recipes.forEach((recipe) => {
         newState.allRecipes[recipe.id] = recipe;
       });
       return newState;
     case GET_SINGLE_RECIPE:
-      newState = { ...state };
+      newState = {
+        ...state,
+        singleRecipe: { ...state.singleRecipe },
+        allRecipes: { ...state.allRecipes },
+      };
       newState.singleRecipe = action.recipe;
       return newState;
     case CREATE_RECIPE:
-      newState = { ...state };
+      newState = {
+        ...state,
+        singleRecipe: { ...state.singleRecipe },
+        allRecipes: { ...state.allRecipes },
+      };
       newState.singleRecipe[action.recipe.id] = action.recipe;
       return newState;
     case UPDATE_RECIPE:
-      newState = { ...state };
+      newState = {
+        ...state,
+        singleRecipe: { ...state.singleRecipe },
+        allRecipes: { ...state.allRecipes },
+      };
       newState.singleRecipe = action.form;
       return newState;
     case DELETE_RECIPE:
-      newState = { ...state, allRecipes: { ...state.allRecipes } };
+      newState = {
+        ...state,
+        allRecipes: { ...state.allRecipes },
+        singleRecipe: { ...state.singleRecipe },
+      };
       delete newState.allRecipes[action.recipeId];
-      delete newState.singleRecipe;
+      delete newState.singleRecipe[action.recipeId];
       return newState;
     default:
       return state;
