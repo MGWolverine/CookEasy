@@ -6,66 +6,55 @@ import "./HomePage.css";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const [recipes, setRecipes] = useState([]);
-  const allRecipes = useSelector((state) => state.recipes.allRecipes)
+  const allRecipes = useSelector((state) => state.recipes.allRecipes);
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getRecipesThunk()).then((data) => {
-      setRecipes(data);
-    });
+    dispatch(getRecipesThunk());
   }, [dispatch]);
 
-  if (!recipes) {
-    return null;
-  }
-
-  const splitList = (text) => {
-    const parts = text.split("*");
-    const filteredParts = parts.filter((part) => part.trim() !== "");
-
-    return (
-      <ul>
-        {filteredParts.map((part, index) => (
-          <li key={index}>{part}</li>
-        ))}
-      </ul>
-    );
-  };
-
-  const splitAndNumberedList = (text) => {
-    const parts = text.split("*");
-    const filteredParts = parts.filter((part) => part.trim() !== "");
-
-    return (
-      <ol type="1">
-        {filteredParts.map((part, index) => (
-          <li key={index}>{part}</li>
-        ))}
-      </ol>
-    );
-  };
+  const allRecipe = Object.values(allRecipes)[0];
 
   return (
     <div className="homepage-container">
-      <Link to="/recipes/create_recipe">create a recipe</Link>
-      {Object.values(allRecipes).length > 0 && Object.values(allRecipes).map((recipe) => (
-        <div
-          className="recipe-item"
-          onClick={() => {
-            history.push(`/recipes/${recipe.id}`);
-          }}
-          key={recipe.id}
-        >
-          <img src={recipe.recipe_image} alt={recipe.title} />
-          <div>
-            <h2>{recipe.title}</h2>
-            <p>{recipe.description}</p>
-            {splitAndNumberedList(recipe.instructions)}
-            {splitList(recipe.ingredients)}
-          </div>
+      <div
+        className="main-recipe-item"
+        onClick={() => {
+          history.push(`/recipes/${allRecipe?.id}`);
+        }}
+        key={allRecipe?.id}
+      >
+        <img
+          className="main-recipe-image"
+          src={allRecipe?.recipe_image}
+          alt={allRecipe?.title}
+        />
+        <div className="main-recipe-info">
+          <h2 className="main-recipe-title">{allRecipe?.title}</h2>
+          <p className="main-recipe-description">{allRecipe?.description}</p>
         </div>
-      ))}
+      </div>
+      <div>
+        <h1 className="recipe-title">Latest Recipes</h1>
+      </div>
+      <div className="recipes-flexed">
+        {Object.values(allRecipes).length > 0 &&
+          Object.values(allRecipes).map((recipe) => (
+            <div
+              className="recipe-item"
+              onClick={() => {
+                history.push(`/recipes/${recipe.id}`);
+              }}
+              key={recipe.id}
+            >
+              <img src={recipe.recipe_image} alt={recipe.title} />
+              <div>
+                <h2 className="flex-recipe-title">{recipe.title}</h2>
+                {/* <p>{recipe.description}</p> */}
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

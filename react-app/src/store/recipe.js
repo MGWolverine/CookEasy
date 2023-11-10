@@ -111,7 +111,7 @@ const recipesReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
     case GET_RECIPES:
-      newState = { ...state };
+      newState = { ...state, allRecipes: { ...state.allRecipes } };
       action.recipes.forEach((recipe) => {
         newState.allRecipes[recipe.id] = recipe;
       });
@@ -129,7 +129,7 @@ const recipesReducer = (state = initialState, action) => {
       newState.singleRecipe = action.form;
       return newState;
     case DELETE_RECIPE:
-      newState = { ...state };
+      newState = { ...state, allRecipes: { ...state.allRecipes } };
       delete newState.allRecipes[action.recipeId];
       delete newState.singleRecipe;
       return newState;
