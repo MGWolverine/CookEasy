@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createRecipeThunk } from "../../store/recipe";
+import "./CreateRecipe.css";
 
 function CreateRecipeForm({ submitted, id }) {
   const dispatch = useDispatch();
@@ -90,7 +91,7 @@ function CreateRecipeForm({ submitted, id }) {
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
-        <div>
+        <div className="form-group">
           <label htmlFor="title">Title:</label>
           <input
             type="text"
@@ -101,7 +102,7 @@ function CreateRecipeForm({ submitted, id }) {
             <p className="upload-recipe-errors">{errors.title}</p>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="description">Description:</label>
           <input
             type="text"
@@ -112,7 +113,7 @@ function CreateRecipeForm({ submitted, id }) {
             <p className="upload-recipe-errors">{errors.description}</p>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="recipe_image">Recipe Image:</label>
           <input
             type="file"
@@ -124,9 +125,10 @@ function CreateRecipeForm({ submitted, id }) {
           )}
           {imageLoading && <p>Loading...</p>}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="instructions">Instructions:</label>
           <textarea
+          placeholder="Please seperate instructions with a period. ex: (Place chicken in the oven.)"
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
           />
@@ -134,7 +136,7 @@ function CreateRecipeForm({ submitted, id }) {
             <p className="upload-recipe-errors">{errors.instructions}</p>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="prep_time">Prep Time (minutes):</label>
           <input
             type="number"
@@ -145,7 +147,7 @@ function CreateRecipeForm({ submitted, id }) {
             <p className="upload-recipe-errors">{errors.prep_time}</p>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="cook_time">Cook Time (minutes):</label>
           <input
             type="number"
@@ -156,7 +158,7 @@ function CreateRecipeForm({ submitted, id }) {
             <p className="upload-recipe-errors">{errors.cook_time}</p>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="total_time">Total Time (minutes):</label>
           <input
             type="number"
@@ -167,9 +169,10 @@ function CreateRecipeForm({ submitted, id }) {
             <p className="upload-recipe-errors">{errors.total_time}</p>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="ingredients">Ingredients:</label>
           <textarea
+            placeholder="Please seperate ingredients with a period. ex: (2 pounds chicken.)"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
           />

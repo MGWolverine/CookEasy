@@ -17,7 +17,7 @@
   border-radius: 20px;
   padding: 5px;
   color: white;
-  font-size: x-large;
+  font-size: x-large, thin;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
@@ -34,4 +34,49 @@
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: xx-large;
   color: rgb(196, 13, 13);
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.modal-logout-button {
+  background-color: rgb(196, 13, 13);
+  color: #D9EEF1;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  padding: 3px 7px;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px;
+}
+
+.profile-button i {
+  font-size: 24px;
+  color: rgb(196, 13, 13);
+}
+
+.profile-dropdown.hidden {
+  display: none;
+}
+
+.profile-dropdown {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-dropdown li {
+  margin: 5px 0;
+  list-style: none;
+}
+
+.profile-dropdown li:hover {
+  cursor: pointer;
 }

@@ -21,7 +21,7 @@ function Navigation({ isLoaded }) {
         </div>
       )}
     </div>
-    <NavLink className="create-recipe-link" to="/recipes/create_recipe">Create Your Recipe</NavLink>
+    <NavLink className="create-recipe-link" to="/recipes/create_recipe">Create A Recipe</NavLink>
     </div>
   );
 }

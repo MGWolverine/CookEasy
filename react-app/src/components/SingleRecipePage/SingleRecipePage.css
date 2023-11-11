@@ -1,0 +1,33 @@
+.single-recipe-photo-info {
+  display: flex;
+}
+
+.single-recipe-image {
+  width: 100%;
+  padding-right: 30px;
+}
+
+.image-time-div {
+    width: 50%;
+}
+
+.description-div {
+    width: 50%;
+}
+
+.ing-ins-div {
+    display: flex;
+}
+
+.time-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-recipe-comment-buttons {
+    display: flex;
+}
+
+.single-recipe-buttons {
+    display: flex;
+}
