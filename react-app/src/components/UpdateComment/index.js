@@ -61,9 +61,8 @@ function UpdateComment({ currentComment }) {
 
   return (
     <>
-      <div>
+      <div className="delete-recipe-modal">
         <div>
-          <button onClick={handleClose}>X</button>
           <form
             className="upload-comment"
             onSubmit={handleSubmit}

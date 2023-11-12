@@ -19,6 +19,7 @@
 
 .recipes-flexed {
   display: flex;
+  overflow-x: auto;
 }
 
 .recipe-title {
@@ -48,8 +49,8 @@
 }
 
 .recipe-item img {
-  width: 100%;
-  max-height: 150px;
+  width: 220px;
+  height: 125px;
   object-fit: cover;
 }
 

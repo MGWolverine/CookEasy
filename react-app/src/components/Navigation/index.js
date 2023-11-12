@@ -21,7 +21,13 @@ function Navigation({ isLoaded }) {
         </div>
       )}
     </div>
-    <NavLink className="create-recipe-link" to="/recipes/create_recipe">Create A Recipe</NavLink>
+    {sessionUser ? (
+                <NavLink className="create-recipe-link" to="/recipes/create_recipe">Create A Recipe!</NavLink>
+            ) : (
+              <p className="create-recipe-link" style={{ color: "white", width: "260px" }}>
+                Sign up or log in to create a recipe!
+              </p>
+            )}
     </div>
   );
 }

@@ -31,3 +31,30 @@
 .single-recipe-buttons {
     display: flex;
 }
+
+.comments-title {
+    text-decoration: underline;
+}
+
+.single-recipe-title {
+    text-align: center;
+}
+
+.singlePage-comment {
+    border: black 1px solid;
+    height: 30px;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-top: 7px;
+    width: fit-content;
+    padding-right: 10px;
+}
+
+.single-recipe-ingredients {
+    padding-right: 30px;
+    width: 350px;
+}
+
+.single-recipe-instructions {
+    padding-left: 20px;
+}
