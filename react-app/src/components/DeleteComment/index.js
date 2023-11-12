@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { getSingleRecipeThunk } from "../../store/recipe";
+import "./DeleteComment.css";
 
 function DeleteComment({currentComment}) {
   const dispatch = useDispatch();
@@ -37,7 +38,6 @@ function DeleteComment({currentComment}) {
     <>
       {exist && (
         <div className="delete-recipe-modal">
-          <button onClick={handleClose}>X</button>
           <h2 className="delete-recipe">Confirm Delete</h2>
           <div>Are you sure you want to remove this Comment?</div>
           <button onClick={confirmDelete}>Yes (Delete Comment)</button>

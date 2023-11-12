@@ -18,6 +18,7 @@ function SingleRecipePage() {
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
   // const allComments = useSelector((state) => state.comments.allComments);
   const [submitted, setSubmitted] = useState(false);
+  const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
 
   useEffect(() => {
@@ -56,72 +57,124 @@ function SingleRecipePage() {
     <>
       {isLoaded && (
         <div>
-          <Link to="/">Back to All Recipes</Link>
-
-          <img src={singleRecipe.recipe_image} alt={singleRecipe.title} />
-          <h1>{singleRecipe.title}</h1>
-          <p>{singleRecipe.description}</p>
-          <h2>Instructions:</h2>
-          {singleRecipe.id && splitAndNumberedList(singleRecipe.instructions)}
-          <h2>Ingredients:</h2>
-          {singleRecipe.id && splitList(singleRecipe.ingredients)}
+          <h1 className="single-recipe-title">{singleRecipe.title}</h1>
+          <div className="single-recipe-photo-info">
+            <div className="description-div">
+              <p className="single-recipe-description">
+                {singleRecipe.description}
+              </p>
+            </div>
+            <div className="image-time-div">
+              <img
+                className="single-recipe-image"
+                src={singleRecipe.recipe_image}
+                alt={singleRecipe.title}
+              />
+              <div className="time-div">
+                <p className="time">Prep: {singleRecipe.prep_time} min</p>
+                <p className="time">Cook: {singleRecipe.cook_time} min</p>
+                <p className="time">Total: {singleRecipe.total_time} min</p>
+              </div>
+            </div>
+          </div>
+          <hr></hr>
+          <div className="ing-ins-div">
+            <div className="single-recipe-ingredients">
+              <h2>Ingredients:</h2>
+              {singleRecipe.id && splitList(singleRecipe.ingredients)}
+            </div>
+            <hr></hr>
+            <div className="single-recipe-instructions">
+              <h2>Instructions:</h2>
+              {singleRecipe.id &&
+                splitAndNumberedList(singleRecipe.instructions)}
+            </div>
+          </div>
+          <hr></hr>
+          <h1 className="comments-title">Comments</h1>
           {singleRecipe?.comments?.length > 0 &&
             singleRecipe?.comments?.map((blurb) => (
               <>
-                <p>{blurb.comment}</p>
-                <div>
-                  <OpenModalButton
-                    buttonText={"Delete Comment"}
-                    modalComponent={
-                      <DeleteComment
-                        currentComment={blurb}
-                        recipeId={singleRecipe.id}
-                        submitted={() => setSubmitted(true)}
+                <p className="singlePage-comment">{blurb.comment}</p>
+                <div className="single-recipe-comment-buttons">
+                  {sessionUser?.id === blurb?.user_id ? (
+                    <div>
+                      <OpenModalButton
+                        buttonText={"Delete Comment"}
+                        modalComponent={
+                          <DeleteComment
+                            currentComment={blurb}
+                            recipeId={singleRecipe.id}
+                            submitted={() => setSubmitted(true)}
+                          />
+                        }
                       />
-                    }
-                  />
-                </div>
-                <div>
-                  <OpenModalButton
-                    buttonText={"Update Comment"}
-                    modalComponent={
-                      <UpdateComment
-                        currentComment={blurb}
-                        recipeId={singleRecipe.id}
-                        submitted={() => setSubmitted(true)}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  {sessionUser?.id === blurb?.user_id ? (
+                    <div>
+                      <OpenModalButton
+                        buttonText={"Update Comment"}
+                        modalComponent={
+                          <UpdateComment
+                            currentComment={blurb}
+                            recipeId={singleRecipe.id}
+                            submitted={() => setSubmitted(true)}
+                          />
+                        }
                       />
-                    }
-                  />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </>
             ))}
         </div>
       )}
-      <div>
-        <OpenModalButton
-          buttonText={"Create Comment"}
-          modalComponent={
-            <CreateComment
-              recipeId={singleRecipe.id}
-              submitted={() => setSubmitted(true)}
+      <div className="single-recipe-buttons">
+        {sessionUser ? (
+          <div>
+            <OpenModalButton
+              buttonText={"Create Comment"}
+              modalComponent={
+                <CreateComment
+                  recipeId={singleRecipe.id}
+                  submitted={() => setSubmitted(true)}
+                />
+              }
             />
-          }
-        />
-      </div>
-      <div>
-        <OpenModalButton
-          buttonText={"Delete"}
-          modalComponent={
-            <DeleteRecipe
-              recipeId={singleRecipe.id}
-              submitted={() => setSubmitted(true)}
+          </div>
+        ) : (
+          <></>
+        )}
+        {sessionUser && sessionUser?.id === singleRecipe?.user_id ? (
+          <div>
+            <OpenModalButton
+              buttonText={"Delete Recipe"}
+              modalComponent={
+                <DeleteRecipe
+                  recipeId={singleRecipe.id}
+                  submitted={() => setSubmitted(true)}
+                />
+              }
             />
-          }
-        />
+          </div>
+        ) : (
+          <></>
+        )}
+                {sessionUser && sessionUser?.id === singleRecipe?.user_id ? (
+        <button
+          onClick={() => history.push(`/recipes/${singleRecipe.id}/edit`)}
+        >
+          Update Recipe
+        </button>
+                ) : (
+                  <></>
+                )}
       </div>
-      <button onClick={() => history.push(`/recipes/${singleRecipe.id}/edit`)}>
-        Update Recipe
-      </button>
     </>
   );
 }
