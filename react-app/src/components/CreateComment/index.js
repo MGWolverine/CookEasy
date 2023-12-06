@@ -16,6 +16,7 @@ function CreateComment() {
     const errors = {};
     if (!comment) errors.comment = "Recipe comment is required";
     if (!rating) errors.rating = "Recipe rating is required";
+    if (rating > 5) errors.rating = "Rating must be between 1 and 5";
 
     setErrors(errors);
 

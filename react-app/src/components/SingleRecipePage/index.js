@@ -59,11 +59,6 @@ function SingleRecipePage() {
         <div>
           <h1 className="single-recipe-title">{singleRecipe.title}</h1>
           <div className="single-recipe-photo-info">
-            <div className="description-div">
-              <p className="single-recipe-description">
-                {singleRecipe.description}
-              </p>
-            </div>
             <div className="image-time-div">
               <img
                 className="single-recipe-image"
@@ -75,6 +70,11 @@ function SingleRecipePage() {
                 <p className="time">Cook: {singleRecipe.cook_time} min</p>
                 <p className="time">Total: {singleRecipe.total_time} min</p>
               </div>
+            </div>
+            <div className="description-div">
+              <p className="single-recipe-description">
+                {singleRecipe.description}
+              </p>
             </div>
           </div>
           <hr></hr>
@@ -165,15 +165,15 @@ function SingleRecipePage() {
         ) : (
           <></>
         )}
-                {sessionUser && sessionUser?.id === singleRecipe?.user_id ? (
-        <button
-          onClick={() => history.push(`/recipes/${singleRecipe.id}/edit`)}
-        >
-          Update Recipe
-        </button>
-                ) : (
-                  <></>
-                )}
+        {sessionUser && sessionUser?.id === singleRecipe?.user_id ? (
+          <button
+            onClick={() => history.push(`/recipes/${singleRecipe.id}/edit`)}
+          >
+            Update Recipe
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
