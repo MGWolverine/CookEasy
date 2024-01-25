@@ -39,23 +39,6 @@ export const getCommentThunk = (comments) => async (dispatch) => {
   }
 };
 
-// export const createCommentThunk = (comment, recipeId) => async (dispatch) => {
-//   const response = await fetch(`/api/comments/create_comment`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(comment),
-//   });
-
-//   if (response.ok) {
-//     const newComment = await response.json();
-//     dispatch(createComment(newComment));
-//     return newComment;
-//   } else {
-//     const errors = await response.json();
-//     return errors;
-//   }
-// };
-
 export const updateCommentThunk = (comment, commentId) => async (dispatch) => {
   const response = await fetch(`/api/comments/${commentId}`, {
     method: "PUT",
