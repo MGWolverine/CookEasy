@@ -50,7 +50,6 @@ function HomePage() {
               <img src={recipe.recipe_image} alt={recipe.title} />
               <div>
                 <h2 className="flex-recipe-title">{recipe.title}</h2>
-                {/* <p>{recipe.description}</p> */}
               </div>
             </div>
           ))}
