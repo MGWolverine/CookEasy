@@ -16,7 +16,6 @@ function SingleRecipePage() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const singleRecipe = useSelector((state) => state.recipes.singleRecipe);
-  // const allComments = useSelector((state) => state.comments.allComments);
   const [submitted, setSubmitted] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
