@@ -128,7 +128,7 @@ function CreateRecipeForm({ submitted, id }) {
         <div className="form-group">
           <label htmlFor="instructions">Instructions:</label>
           <textarea
-          placeholder="Please seperate instructions with a period. ex: (Place chicken in the oven.)"
+            placeholder="Please seperate instructions with a period. ex: (Place chicken in the oven.)"
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
           />
