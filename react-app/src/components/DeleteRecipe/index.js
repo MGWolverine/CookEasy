@@ -32,7 +32,7 @@ function DeleteRecipe({ recipeId, submitted }) {
       {exist && (
         <div className="delete-recipe-modal">
           <h2 className="delete-recipe">Confirm Delete</h2>
-          <div>Are you sure you want to remove this Recipe?</div>
+          <div>Are you sure you want to delete this Recipe?</div>
           <button onClick={confirmDelete}>Yes (Delete Recipe)</button>
           <button onClick={cancelDelete}>No (Keep Recipe)</button>
         </div>
