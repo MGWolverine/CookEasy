@@ -47,7 +47,7 @@ function UpdateRecipe() {
     const errors = {};
     if (!title) errors.title = "Recipe title is required";
     if (!description) errors.description = "Recipe description is required";
-    if (!prep_time) errors.prep_time = "Recipe preperation time is required";
+    if (!prep_time) errors.prep_time = "Recipe prep time is required";
     if (!cook_time) errors.cook_time = "Recipe cook time is required";
     if (!total_time) errors.total_time = "Recipe total time is required";
     if (!ingredients) errors.ingredients = "Recipe ingredients are required";
