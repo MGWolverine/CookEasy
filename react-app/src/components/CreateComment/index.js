@@ -99,7 +99,7 @@ function CreateComment() {
             </div>
           </form>
         </div>
-        <button onClick={handleSubmit}>Submit comment</button>
+        <button onClick={handleSubmit}>Submit your comment</button>
       </div>
     </>
   );
