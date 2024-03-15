@@ -39,7 +39,7 @@ function DeleteComment({currentComment}) {
       {exist && (
         <div className="delete-recipe-modal">
           <h2 className="delete-recipe">Confirm Delete</h2>
-          <div>Are you sure you want to remove this Comment?</div>
+          <div>Are you sure you want to delete this Comment?</div>
           <button onClick={confirmDelete}>Yes (Delete Comment)</button>
           <button onClick={cancelDelete}>No (Keep Comment)</button>
         </div>
