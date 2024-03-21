@@ -1,1 +1,1 @@
-CookEasy is an NYT Recipes clone. You can make your own account.
+CookEasy is an NYT Recipes clone. You can make your own account. Log in, and create a recipe of your choosing. Upload a recipe image using AWS. As well as browse recipes to see others created recipes.
