@@ -39,9 +39,12 @@ function Root() {
 	);
 }
 
+// Render the root component of the React application
 ReactDOM.render(
+	// Use React.StrictMode for stricter development mode checks
 	<React.StrictMode>
 		<Root />
 	</React.StrictMode>,
+	// Specify the DOM element where the React application will be mounted
 	document.getElementById("root")
 );
