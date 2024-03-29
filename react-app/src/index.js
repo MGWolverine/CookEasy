@@ -10,10 +10,16 @@ import App from "./App";
 
 import "./index.css";
 
+// Configure the Redux store using the configureStore function
 const store = configureStore();
 
+// Check if the environment is not set to production
 if (process.env.NODE_ENV !== "production") {
+	// If not in production mode, expose the store to the global window object
+	// This allows accessing the store from the browser's developer console
 	window.store = store;
+
+	// Also, expose sessionActions to the global window object
 	window.sessionActions = sessionActions;
 }
 
