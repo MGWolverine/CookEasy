@@ -14,8 +14,9 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+    // Dispatch an action to authenticate the user
+    dispatch(authenticate()).then(() => setIsLoaded(true)); // assuming authenticate() is an asynchronous action
+  }, [dispatch]); // Run the effect only when `dispatch` changes
 
   return (
     <>
