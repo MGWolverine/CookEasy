@@ -73,25 +73,49 @@ const initialState = {
   allComments: {},
 };
 
+// Define the commentsReducer function with initialState and action parameters
 const commentsReducer = (state = initialState, action) => {
-  let newState = {};
+  let newState = {}; // Initialize a variable to hold the new state
+
+  // Switch statement to handle different action types
   switch (action.type) {
+    // Action type: GET_COMMENTS
     case GET_COMMENTS:
+      // Create a new state object with allComments initialized as an empty object
       newState = { ...state, allComments: {} };
+      // Set comments from action to the new state
       newState.comments = action.comments;
+      // Return the new state
       return newState;
+
+    // Action type: CREATE_COMMENT
     case CREATE_COMMENT:
+      // Create a new state object with allComments cloned from the previous state
       newState = { ...state, allComments: { ...state.allComments } };
+      // Add the new comment to allComments using its id as key
       newState.allComments[action.comment.id] = action.comment;
+      // Return the new state
       return newState;
+
+    // Action type: UPDATE_COMMENT
     case UPDATE_COMMENT:
+      // Create a new state object with allComments cloned from the previous state
       newState = { ...state, allComments: { ...state.allComments } };
+      // Update the comment in allComments using its id as key
       newState.allComments[action.comment.id] = action.comment;
+      // Return the new state
       return newState;
+
+    // Action type: DELETE_COMMENT
     case DELETE_COMMENT:
+      // Create a new state object by cloning the previous state
       newState = { ...state };
+      // Delete the allComments property from newState
       delete newState.allComments;
+      // Return the new state
       return newState;
+
+    // Default case: return the current state
     default:
       return state;
   }
