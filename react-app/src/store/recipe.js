@@ -108,49 +108,61 @@ const initialState = {
 };
 
 const recipesReducer = (state = initialState, action) => {
-  let newState = {};
+  let newState = {}; // Initialize a new state object
+
+  // Switch statement to handle different action types
   switch (action.type) {
     case GET_RECIPES:
       newState = {
         ...state,
-        allRecipes: { ...state.allRecipes },
-        singleRecipe: { ...state.singleRecipe },
+        allRecipes: { ...state.allRecipes }, // Clone allRecipes object
+        singleRecipe: { ...state.singleRecipe }, // Clone singleRecipe object
       };
+      // Iterate through action.recipes and update allRecipes
       action.recipes.forEach((recipe) => {
         newState.allRecipes[recipe.id] = recipe;
       });
       return newState;
+
     case GET_SINGLE_RECIPE:
       newState = {
         ...state,
-        singleRecipe: { ...state.singleRecipe },
-        allRecipes: { ...state.allRecipes },
+        singleRecipe: { ...state.singleRecipe }, // Clone singleRecipe object
+        allRecipes: { ...state.allRecipes }, // Clone allRecipes object
       };
+      // Update singleRecipe with the received recipe
       newState.singleRecipe = action.recipe;
       return newState;
+
     case CREATE_RECIPE:
       newState = {
         ...state,
-        singleRecipe: { ...state.singleRecipe },
-        allRecipes: { ...state.allRecipes },
+        singleRecipe: { ...state.singleRecipe }, // Clone singleRecipe object
+        allRecipes: { ...state.allRecipes }, // Clone allRecipes object
       };
+      // Add the new recipe to allRecipes
       newState.allRecipes[action.recipe.id] = action.recipe;
+      // Update singleRecipe to include the new recipe
       newState.singleRecipe[action.recipe.id] = action.recipe;
       return newState;
+
     case UPDATE_RECIPE:
       newState = {
         ...state,
-        singleRecipe: { ...state.singleRecipe },
-        allRecipes: { ...state.allRecipes },
+        singleRecipe: { ...state.singleRecipe }, // Clone singleRecipe object
+        allRecipes: { ...state.allRecipes }, // Clone allRecipes object
       };
+      // Update singleRecipe with the updated form data
       newState.singleRecipe = action.form;
       return newState;
+
     case DELETE_RECIPE:
       newState = {
         ...state,
-        allRecipes: { ...state.allRecipes },
-        singleRecipe: { ...state.singleRecipe },
+        allRecipes: { ...state.allRecipes }, // Clone allRecipes object
+        singleRecipe: { ...state.singleRecipe }, // Clone singleRecipe object
       };
+      // Delete the recipe from allRecipes and singleRecipe
       delete newState.allRecipes[action.recipeId];
       delete newState.singleRecipe[action.recipeId];
       return newState;
